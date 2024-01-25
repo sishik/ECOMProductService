@@ -3,6 +3,7 @@ package com.ecommerce.ProductService.controllers;
 import com.ecommerce.ProductService.dtos.ProductListResponseDto;
 import com.ecommerce.ProductService.dtos.ProductRequestDto;
 import com.ecommerce.ProductService.dtos.ProductResponseDto;
+import com.ecommerce.ProductService.exception.ProductNotFoundException;
 import com.ecommerce.ProductService.models.Product;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,11 @@ public class ProductController {
     }
     @GetMapping("/products")
     public ResponseEntity getAllproducts(){
-        ProductListResponseDto responseDto = productService.getAllProduct();
+        ProductListResponseDto responseDto = productService.getAllProducts();
         return ResponseEntity.ok(responseDto);
     }
     @GetMapping("/products/{id}")
-   public ResponseEntity getProductById(@PathVariable("id")int id) {
+   public ResponseEntity getProductById(@PathVariable("id")int id) throws ProductNotFoundException {
         ProductResponseDto response = productService.getProductById(id);
         return ResponseEntity.ok(response);
     }
